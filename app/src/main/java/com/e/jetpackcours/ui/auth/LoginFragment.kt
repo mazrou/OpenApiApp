@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.e.jetpackcours.R
 import com.e.jetpackcours.activityScopedFragmentViewModel
 import com.e.jetpackcours.data.model.AuthToken
+import com.e.jetpackcours.ui.auth.state.AuthStateEvent
 import com.e.jetpackcours.ui.auth.state.LoginFields
 import com.e.jetpackcours.util.GenericApiResponse
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -23,14 +24,8 @@ class LoginFragment : BaseAuthFragment(R.layout.fragment_login) {
         subscribeObservers()
 
         login_button.setOnClickListener {
-            viewModel.setAuthToken(
-                AuthToken(
-                    1 ,
-                    "dslkhfskfhdf.s,mgfhjlk"
-                )
-            )
+            login()
         }
-
     }
 
     override fun onDestroyView() {
@@ -43,6 +38,15 @@ class LoginFragment : BaseAuthFragment(R.layout.fragment_login) {
         )
     }
 
+    private fun login (){
+        viewModel.setStateEvent(
+            AuthStateEvent.LoginAttemptEvent(
+                input_email.text.toString() ,
+                input_password.text.toString()
+            )
+        )
+
+    }
     private fun subscribeObservers(){
         viewModel.viewState.observe(viewLifecycleOwner , Observer {
             it.loginFields?.let {loginFiewlds->
@@ -50,6 +54,7 @@ class LoginFragment : BaseAuthFragment(R.layout.fragment_login) {
                 loginFiewlds.login_password?.let {text -> input_password.setText(text) }
             }
         })
-
     }
+
+
 }

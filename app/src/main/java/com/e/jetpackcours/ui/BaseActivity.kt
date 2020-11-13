@@ -11,7 +11,6 @@ abstract class BaseActivity : AppCompatActivity()  , KodeinAware{
 
     override val kodein: Kodein by closestKodein()
 
-
     protected  val sessionManager : SessionManager by instance()
 
     val TAG : String = "AppDebug"

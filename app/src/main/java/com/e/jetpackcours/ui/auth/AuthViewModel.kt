@@ -60,10 +60,18 @@ constructor(
         return when(stateEvent){
 
             is LoginAttemptEvent ->{
-                AbsentLiveData.create()
+                return authRepository.attemptLogin(
+                    stateEvent.email ,
+                    stateEvent.password
+                )
             }
             is RegisterAttemptEvent ->{
-                AbsentLiveData.create()
+                return authRepository.attemptRegistration(
+                    stateEvent.email ,
+                    stateEvent.username ,
+                    stateEvent.password ,
+                    stateEvent.confirm_password
+                )
             }
 
             is CheckPreviousAuthEvent ->{

@@ -35,9 +35,10 @@ class OpenApiApplication : Application() , KodeinAware {
         bind() from singleton { AuthRepository(instance(), instance(), instance(), instance()) }
 
         //ViewModels
-        //bindViewModel<AuthViewModel>() with provider { AuthViewModel(instance()) }
+        bind<AuthViewModel>() with provider { AuthViewModel(instance()) }
+
         // bind<AuthViewModel>(AuthViewModel::class.java.simpleName)#
-        import(viewModelModule)
+        //import(viewModelModule)
     }
 
     //adapter

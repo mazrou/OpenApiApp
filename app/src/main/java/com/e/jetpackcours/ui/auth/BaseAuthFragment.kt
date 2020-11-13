@@ -1,5 +1,7 @@
 package com.e.jetpackcours.ui.auth
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.e.jetpackcours.activityScopedFragmentViewModel
@@ -15,12 +17,18 @@ abstract class BaseAuthFragment(layout : Int)   : Fragment(layout) , KodeinAware
     val TAG : String =" AppDebug"
 
 
-    val viewModel : AuthViewModel by activityScopedFragmentViewModel()
+    lateinit var viewModel : AuthViewModel
 
     //viewModels(ownerProducer = { requireParentFragment() })
 
 
-    private val viewModeFactory: ViewModelProvider.Factory by instance()
+    //private val viewModeFactory: ViewModelProvider.Factory by instance()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = (activity as AuthActivity ).viewModel
+    }
+
 
 
 }
